@@ -1,0 +1,20 @@
+{
+  "name": "platformer-game-engine",
+  "version": "1.0.0",
+  "description": "A modular 2D platformer game engine for web browsers",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "node build.js",
+    "dev": "npx http-server . -p 3000 -o /examples/platformer.html",
+    "test": "echo \"No tests yet\" && exit 0"
+  },
+  "keywords": [
+    "game-engine",
+    "platformer",
+    "javascript",
+    "html5",
+    "canvas"
+  ],
+  "author": ""
+}
