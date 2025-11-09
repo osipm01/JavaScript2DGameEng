@@ -1,0 +1,27 @@
+
+html, body{
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: none;
+    text-decoration: none;
+    font-family: -apple-system;
+    font-weight: 500;
+    background: rgba(73, 67, 67, 0.34);
+
+}
+
+
+.bar{
+    width: 100%;
+    height: 100px;
+    background: rgba(59, 47, 47, 0.34);
+}
+
+canvas{
+    width: 1400px;
+    height: 600px;
+}
