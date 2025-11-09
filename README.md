@@ -1,7 +1,5 @@
 # JavaScript2DGameEng
-this game engine is no longer supported 
-latest current version 
-01.10.2024
+latest current version v2.012 09.11.2025 sp1
 
 # history
 
