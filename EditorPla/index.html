@@ -1,15 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="style.css">
-    <script type="module" async defer src="index.js"></script>
-    <title>Platforl editor</title>
+    <title>Map Editor</title>
+    <script async defer type="module" src="index.js"></script>
+    <style>
+        canvas { border: 1px solid #ccc; }
+        .controls { margin: 10px 0; }
+        button { margin: 5px; padding: 5px 10px; }
+    </style>
 </head>
 <body>
-    <div class="containner">
-        <div class="bar"></div>
-        <canvas id="canvas"></canvas>
-    </div>
+<div class="controls">
+    <button id="save">Save Map</button>
+    <button id="load" >Load Map</button>
+    <button id="clear" >Clear Map</button>
+</div>
+<canvas id="gameCanvas" width="1400" height="600"></canvas>
+
+<script type="module">
+
+</script>
 </body>
 </html>

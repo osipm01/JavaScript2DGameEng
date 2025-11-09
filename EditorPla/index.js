@@ -1,23 +1,27 @@
-import { Map } from "./src/Map.js";
+import { Map } from './src/Map.js';
 
-const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d");
+const canvas = document.getElementById('gameCanvas');
+const ctx = canvas.getContext('2d');
 
-const map = new Map(ctx, 6);
+const save = document.getElementById('save');
+const load = document.getElementById('load');
+const clear = document.getElementById('clear');
 
-// Draw the map
-map.draw();
+const map = new Map(ctx, 32);
 
-// Get tile at mouse position
-canvas.addEventListener('click', (e) => {
-    const rect = canvas.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+save.addEventListener('click', () => {
+    map.saveMap()
+})
+load.addEventListener('click', () => {
+    map.loadMap()
+})
+clear.addEventListener('click', () => {
+    map.clearMap()
+})
 
-    const tile = map.getTile(x, y);
-    if (tile) {
-        console.log(`Clicked tile: ${tile.col}, ${tile.row}`);
-        map.setTile(tile.col, tile.row, 1); // Mark as occupied
-        map.draw(); // Redraw
-    }
-});
+function gameLoop() {
+    map.update();
+    requestAnimationFrame(gameLoop);
+}
+
+gameLoop();
