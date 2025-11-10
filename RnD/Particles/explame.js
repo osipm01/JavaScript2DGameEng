@@ -1,40 +1,37 @@
 // Создание системы частиц
-const particles = [];
+const particleSystem = new ParticleSystem(ctx);
 
-// Создание одиночной частицы
-const particle = new Particles(
-    10, // size
-    "circle", // type
-    "red", // color
-    { x: 100, y: 100, vx: 1, vy: -2 }, // positions with velocity
-    60, // tics (time to live)
-    ctx // canvas context
-);
-
-// Или используя фабричный метод
-const particle2 = Particles.createParticle(150, 150, {
-    type: "rect",
-    color: "blue",
-    size: 8,
-    tics: 120
+// Создание взрыва
+particleSystem.createExplosion(400, 300, 50, {
+    color: "orange",
+    size: 6,
+    tics: 90
 });
 
+// Создание огня
+particleSystem.createFire(200, 400, 8, {
+    color: "red",
+    size: 4
+});
+
+// Запуск непрерывной эмиссии
+particleSystem.startEmission(100, 100, 200);
+
 // В игровом цикле
-function animate() {
+function gameLoop() {
     // Очистка canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
     // Обновление и отрисовка всех частиц
-    for (let i = particles.length - 1; i >= 0; i--) {
-        const particle = particles[i];
-        particle.update();
-        particle.draw();
-        
-        // Удаляем мертвые частицы
-        if (particle.age >= particle.lifetime) {
-            particles.splice(i, 1);
-        }
-    }
+    particleSystem.render();
     
-    requestAnimationFrame(animate);
+    // Показ количества частиц (для отладки)
+    ctx.fillStyle = "white";
+    ctx.fillText(`Particles: ${particleSystem.getParticleCount()}`, 10, 20);
+    
+    requestAnimationFrame(gameLoop);
 }
+
+// Остановка системы
+// particleSystem.stopEmission();
+// particleSystem.clear();

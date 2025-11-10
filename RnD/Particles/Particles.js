@@ -1,26 +1,21 @@
 class Particles {
     constructor(size, type, color, positions, tics, ctx) {
-        this.size = size,
-        this.type = type,
-        this.color = color,
-        this.positions = positions
-        this.tics = tics
-        this.ctx = ctx
-        this.lifetime = tics
-        this.age = 0 
-    }
-
-    parseType() {
-        if (this.type === "circle") {
-            return "this part = circle"
-        }
-        if (this.type === "rect") {
-            return "this part = rect"
-        }
+        this.size = size;
+        this.type = type;
+        this.color = color;
+        this.positions = positions;
+        this.tics = tics;
+        this.ctx = ctx;
+        this.lifetime = tics;
+        this.age = 0;
+        this.initialSize = size;
     }
 
     draw() {
-        const alpha = 1 - (this.age / this.lifetime);
+        const progress = this.age / this.lifetime;
+        const alpha = 1 - progress;
+        const currentSize = this.initialSize * (1 - progress * 0.5);
+
         this.ctx.save();
         this.ctx.globalAlpha = alpha;
         this.ctx.fillStyle = this.color;
@@ -30,7 +25,7 @@ class Particles {
             this.ctx.arc(
                 this.positions.x, 
                 this.positions.y, 
-                this.size, 
+                currentSize, 
                 0, 
                 Math.PI * 2
             );
@@ -39,10 +34,10 @@ class Particles {
         
         if (this.type === "rect") {
             this.ctx.fillRect(
-                this.positions.x - this.size / 2, 
-                this.positions.y - this.size / 2, 
-                this.size, 
-                this.size
+                this.positions.x - currentSize / 2, 
+                this.positions.y - currentSize / 2, 
+                currentSize, 
+                currentSize
             );
         }
         
@@ -52,46 +47,27 @@ class Particles {
     update() {
         this.age++;
         
+        // Обновляем позицию
         if (this.positions.vx && this.positions.vy) {
             this.positions.x += this.positions.vx;
             this.positions.y += this.positions.vy;
         }
         
+        // Добавляем гравитацию
         if (this.positions.gravity) {
             this.positions.vy += this.positions.gravity;
         }
         
+        // Добавляем сопротивление
+        if (this.positions.vx) {
+            this.positions.vx *= 0.98;
+        }
+        if (this.positions.vy) {
+            this.positions.vy *= 0.98;
+        }
+        
         return this.age < this.lifetime;
-    }
-
-    static createParticle(x, y, options = {}) {
-        const defaults = {
-            size: Math.random() * 5 + 2,
-            type: "circle",
-            color: `hsl(${Math.random() * 360}, 100%, 50%)`,
-            tics: 100,
-            vx: (Math.random() - 0.5) * 2,
-            vy: (Math.random() - 0.5) * 2,
-            gravity: 0.05
-        };
-        
-        const settings = { ...defaults, ...options };
-        
-        return new Particles(
-            settings.size,
-            settings.type,
-            settings.color,
-            {
-                x: x,
-                y: y,
-                vx: settings.vx,
-                vy: settings.vy,
-                gravity: settings.gravity
-            },
-            settings.tics,
-            settings.ctx
-        );
     }
 }
 
-export { Particles };
+export { Particles }
