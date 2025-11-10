@@ -1,0 +1,6 @@
+
+class Meneger{
+
+}
+
+export { Meneger };
