@@ -1,12 +1,13 @@
 
 class Particles{
 
-    constructor(size, type, color, positions, tics){
+    constructor(size, type, color, positions, tics, ctx){
         this.size = size,
         this.type = type,
         this.color = color,
         this.positions = positions
         this.tics = tics
+        this.ctx = ctx
     }
 
     parseType(){
@@ -19,7 +20,14 @@ class Particles{
     }
 
     draw(){
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        if(this.type === "circle"){
 
+        }
+        if(this.type === "rect"){
+            
+        }
     }
 
     update(){}
