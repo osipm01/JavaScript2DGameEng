@@ -1,19 +1,7 @@
 # JavaScript2DGameEng
-this game engine is no longer supported 
-latest current version 1.98.4 04/10/2024
-01.10.2024
+latest current version v2.012 09.11.2025 sp1
 
 # history
-project for developing a game engine using javaSCRIPT The engine has been under development since 01/12/2023
-
-new releas 1.98.4
-fix bug
-add new scenes systems
-add menu
-
-исправление багов
-новая архитектура сцен
-добавлено меню
 
 # basic structure of the scene rendering
 
